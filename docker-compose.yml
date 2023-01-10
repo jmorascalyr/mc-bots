@@ -19,5 +19,5 @@ services:
 
 networks:
   network1:
-    name: minecraft_default
+    name: minecraft
     external: true
