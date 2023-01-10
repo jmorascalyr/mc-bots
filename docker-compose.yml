@@ -9,10 +9,7 @@ services:
        printf "const mineflayer = require('mineflayer')\n\nif (process.argv.length < 4 || process.argv.length > 6) {\n  console.log('Usage : node attack.js <host> <port> [<name>] [<password>]')\n  process.exit(1)\n}\n\nhateSpeech=[\n  \"THIS SERVER HAS BEEN COMPROMISED AND I AM AN EVIL CHEAT BOT\",\n]\n\nconst quotes = require('success-motivational-quotes');\nconst { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');\nconst name = uniqueNamesGenerator({\n  dictionaries: [adjectives, animals],\n  length: 2\n});\n\nconst { pathfinder, Movements, goals } = require('mineflayer-pathfinder')\nconst {parse, transform, stringify} = require('csv/sync');\nconst rawRecords = parse(hateSpeech);\n\nconst pvp = require('mineflayer-pvp').plugin\nvar entity = null;\n\nfunction createBot () {\n  const bot = mineflayer.createBot({\n    host: process.argv[2],\n    port: parseInt(process.argv[3]),\n    username: process.argv[4] ? process.argv[4] : name,\n    password: process.argv[5]\n  })\n  bot.loadPlugin(pathfinder)\n  bot.loadPlugin(pvp)\n\n  bot.on('error', (err) => console.log(err))\n  bot.on('end', function() {setTimeout(function() { createBot() }, 5000);});\n\n  bot.on('physicsTick', () => {\n    if (Math.floor(Math.random() * 1000) == 0) {\n      try {\n  	randomOne=Math.floor(Math.random() * hateSpeech.length)\n        bot.chat(hateSpeech[randomOne]);\n      } catch(e) {console.log(e) }\n    }\n  });\n}\ncreateBot()" >> /tmp/poison.js
        node /tmp/poison.js mc-forge 25565 pwn-bot
 
-
-#    command: >
-#      sh -c "cat /tmp/poison.js &&
-#             echo "foo" > /tmp/poison.js &&
-#             cat /tmp/poison.js"
-#    logging:
-#      driver: json-file
+networks:
+    default:
+        external:
+            name: minecraft_default
