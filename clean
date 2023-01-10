@@ -1,0 +1,7 @@
+cd /tmp/mc-bots
+docker compose down
+cd /tmp
+rm ./execute.sh
+rm -rf ./mc-bots
+rm ./eicar.com
+watch ls /tmp
