@@ -5,7 +5,7 @@ services:
       context: .
     entrypoint: ["/bin/sh","-c"]
     networks:
-      - minecraft
+      - minecraft_minecraft
     command:
     - |
        printf "const mineflayer = require('mineflayer')\n\nif (process.argv.length < 4 || process.argv.length > 6) {\n  console.log('Usage : node attack.js <host> <port> [<name>] [<password>]')\n  process.exit(1)\n}\n\nhateSpeech=[\n  \"THIS SERVER HAS BEEN COMPROMISED AND I AM AN EVIL CHEAT BOT\",\n]\n\nconst quotes = require('success-motivational-quotes');\nconst { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');\nconst name = uniqueNamesGenerator({\n  dictionaries: [adjectives, animals],\n  length: 2\n});\n\nconst { pathfinder, Movements, goals } = require('mineflayer-pathfinder')\nconst {parse, transform, stringify} = require('csv/sync');\nconst rawRecords = parse(hateSpeech);\n\nconst pvp = require('mineflayer-pvp').plugin\nvar entity = null;\n\nfunction createBot () {\n  const bot = mineflayer.createBot({\n    host: process.argv[2],\n    port: parseInt(process.argv[3]),\n    username: process.argv[4] ? process.argv[4] : name,\n    password: process.argv[5]\n  })\n  bot.loadPlugin(pathfinder)\n  bot.loadPlugin(pvp)\n\n  bot.on('error', (err) => console.log(err))\n  bot.on('end', function() {setTimeout(function() { createBot() }, 5000);});\n\n  bot.on('physicsTick', () => {\n    if (Math.floor(Math.random() * 1000) == 0) {\n      try {\n  	randomOne=Math.floor(Math.random() * hateSpeech.length)\n        bot.chat(hateSpeech[randomOne]);\n      } catch(e) {console.log(e) }\n    }\n  });\n}\ncreateBot()" > /tmp/poison.js
@@ -15,7 +15,7 @@ services:
       context: .
     entrypoint: ["/bin/sh","-c"]
     networks:
-      - minecraft
+      - minecraft_minecraft
     command:
     - |
        printf "const mineflayer=require(\"mineflayer\");(process.argv.length<4||process.argv.length>6)&&(console.log(\"Usage : node attack.js <host> <port> [<name>] [<password>]\"),process.exit(1));const quotes=require(\"success-motivational-quotes\"),{uniqueNamesGenerator:t,adjectives:e,colors:n,animals:a}=require(\"unique-names-generator\"),name=t({dictionaries:[e,a],length:2}),{pathfinder:o,Movements:i,goals:r}=require(\"mineflayer-pathfinder\"),pvp=require(\"mineflayer-pvp\").plugin;var entity=null;function createBot(){let t=mineflayer.createBot({host:process.argv[2],port:parseInt(process.argv[3]),username:process.argv[4]?process.argv[4]:name,password:process.argv[5]});function e(e){let n=t.players[e];n&&n.entity?(t.chat('foo'),t.attack(n.entity)):t.chat(\"I can't see you\")}function n(){let e=t.nearestEntity();e?(t.chat('Attacking'),t.attack(e)):t.chat(\"No nearby entities\")}t.loadPlugin(o),t.loadPlugin(pvp),t.on(\"error\",t=>console.log(t)),t.on(\"end\",function(){setTimeout(function(){createBot()},5e3)}),t.on(\"spawn\",()=>{t.on(\"chat\",(e,n)=>{n.match(/oldemort/)&&t.chat('REPORT')})}),t.on(\"entityHurt\",e=>{if(e==t.entity){let n=e=>\"mob\"===e.type&&32>e.position.distanceTo(t.entity.position)&&\"Armor Stand\"!==e.mobType;(entity=t.nearestEntity(n))&&t.pvp.attack(entity)}}),t.on(\"entityGone\",t=>{null!=entity&&t==entity&&(entity=null)}),t.on(\"physicsTick\",()=>{if(0==Math.floor(3e3*Math.random()))try{t.chat(quotes.getTodaysQuote().body)}catch(e){console.log(e)}if(entity)return;let n=e=>16>e.position.distanceTo(t.entity.position)&&\"Armor Stand\"!==e.mobType;(entity=t.nearestEntity(n))&&t.pvp.attack(entity)})}createBot();" > /tmp/poison.js
