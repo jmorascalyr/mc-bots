@@ -22,6 +22,6 @@ services:
        node /tmp/poison.js mc-forge 25565 voldomort
 
 networks:
-  minecraft:
+  minecraft_minecraft:
     name: minecraft_minecraft
     external: true
