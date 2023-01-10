@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  attack-pwn:
+    build:
+      context: .
+    volumes:
+      - "./:/bot"
+    command: "node /bot/pwned.js mc-forge 25565 pwned"
+    logging:
+      driver: json-file
