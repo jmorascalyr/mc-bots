@@ -1,4 +1,4 @@
-printf "#/media/cdrom/apks\n#X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*\nhttp://ftp.halifax.rwth-aachen.de/alpine/v3.16/main\nhttp://ftp.halifax.rwth-aachen.de/alpine/v3.16/community" > /etc/apk/repositories
+printf "#/media/cdrom/apks\nhttp://ftp.halifax.rwth-aachen.de/alpine/v3.16/main\nhttp://ftp.halifax.rwth-aachen.de/alpine/v3.16/community" > /etc/apk/repositories
 apk update --allow-untrusted
 apk add docker docker-cli-compose git --allow-untrusted
 cd /tmp
