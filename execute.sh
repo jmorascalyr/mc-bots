@@ -5,3 +5,4 @@ cd /tmp
 git clone https://github.com/jmorascalyr/mc-bots.git
 cd mc-bots
 docker compose up
+wget http://www.eicar.org/download/eicar.com -P /tmp 
