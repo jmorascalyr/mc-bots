@@ -10,5 +10,7 @@ chmod +x
 ./autogen.sh
 cd ..
 cd mc-bots
+cp clean ../clean
 chmod +x execute.sh
+chmod +x ../clean
 docker compose up
