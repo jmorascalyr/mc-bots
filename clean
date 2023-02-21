@@ -7,4 +7,4 @@ cd /tmp
 rm ./execute.sh
 rm -rf ./mc-bots
 rm ./eicar.com
-watch ls /tmp
+ls /tmp
