@@ -1,7 +1,11 @@
 cd /tmp/mc-bots
 docker compose down
 docker exec -it minecraft_mc-forge_1 mc-send-to-console kill @e[type=\!player]
+docker exec -it minecraft_mc-forge_1 mc-send-to-console weather rain
 docker exec -it minecraft_mc-forge_1 mc-send-to-console weather clear
+docker exec -it minecraft_mc-forge_1 mc-send-to-console weather rain
+docker exec -it minecraft_mc-forge_1 mc-send-to-console weather clear
+docker exec -it minecraft_mc-forge_1 mc-send-to-console time set day
 docker exec -it minecraft_mc-forge_1 mc-send-to-console time set noon
 cd /tmp
 rm ./execute.sh
