@@ -22,7 +22,7 @@ services:
        node /tmp/poison.js mc-forge 25565 voldomort
   stress-ng:
     image: alpine
-    command: ["/bin/sh", "-c", "apk update && apk add stress-ng && stress-ng --cpu 4 --io 2 --vm 1 --vm-bytes 2G --timeout 30s"]
+    command: ["/bin/sh", "-c", "apk update && apk add stress-ng && stress-ng --cpu 4 --io 2 --vm 1 --vm-bytes 2G --timeout 30m"]
 networks:
   minecraft_minecraft:
     name: minecraft_minecraft
