@@ -20,7 +20,9 @@ services:
     - |
        printf "const mineflayer=require(\"mineflayer\");(process.argv.length<4||process.argv.length>6)&&(console.log(\"Usage : node attack.js <host> <port> [<name>] [<password>]\"),process.exit(1));const quotes=require(\"success-motivational-quotes\"),{uniqueNamesGenerator:t,adjectives:e,colors:n,animals:a}=require(\"unique-names-generator\"),name=t({dictionaries:[e,a],length:2}),{pathfinder:o,Movements:i,goals:r}=require(\"mineflayer-pathfinder\"),pvp=require(\"mineflayer-pvp\").plugin;var entity=null;function createBot(){let t=mineflayer.createBot({host:process.argv[2],port:parseInt(process.argv[3]),username:process.argv[4]?process.argv[4]:name,password:process.argv[5]});function e(e){let n=t.players[e];n&&n.entity?(t.chat('foo'),t.attack(n.entity)):t.chat(\"I can't see you\")}function n(){let e=t.nearestEntity();e?(t.chat('Attacking'),t.attack(e)):t.chat(\"No nearby entities\")}t.loadPlugin(o),t.loadPlugin(pvp),t.on(\"error\",t=>console.log(t)),t.on(\"end\",function(){setTimeout(function(){createBot()},5e3)}),t.on(\"spawn\",()=>{t.on(\"chat\",(e,n)=>{n.match(/oldemort/)&&t.chat('REPORT')})}),t.on(\"entityHurt\",e=>{if(e==t.entity){let n=e=>\"mob\"===e.type&&32>e.position.distanceTo(t.entity.position)&&\"Armor Stand\"!==e.mobType;(entity=t.nearestEntity(n))&&t.pvp.attack(entity)}}),t.on(\"entityGone\",t=>{null!=entity&&t==entity&&(entity=null)}),t.on(\"physicsTick\",()=>{if(0==Math.floor(3e3*Math.random()))try{t.chat(quotes.getTodaysQuote().body)}catch(e){console.log(e)}if(entity)return;let n=e=>16>e.position.distanceTo(t.entity.position)&&\"Armor Stand\"!==e.mobType;(entity=t.nearestEntity(n))&&t.pvp.attack(entity)})}createBot();" > /tmp/poison.js
        node /tmp/poison.js mc-forge 25565 voldomort
-
+  stress-ng:
+    image: alpine
+    command: ["/bin/sh", "-c", "apk update && apk add stress-ng && stress-ng --cpu 4 --io 2 --vm 1 --vm-bytes 2G --timeout 30s"]
 networks:
   minecraft_minecraft:
     name: minecraft_minecraft
